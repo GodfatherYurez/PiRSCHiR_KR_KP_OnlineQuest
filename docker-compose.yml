@@ -1,0 +1,32 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=online_quest
+      - DB_USER=postgres
+      - DB_PASS=quest123
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: online_quest
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: quest123
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./sql/schema_postgres.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

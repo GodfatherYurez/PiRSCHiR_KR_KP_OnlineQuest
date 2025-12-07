@@ -1,0 +1,11 @@
+{
+    "name": "user/online-quest",
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "config": {
+        "platform": {
+            "php": "8.2"
+        }
+    }
+}
